@@ -1,7 +1,7 @@
 import socket
 from pathlib import Path
 from utils import extract_route, read_file, build_response
-from views import index
+from views import index,delete,edit,error
 
 CUR_DIR = Path(__file__).parent
 
@@ -53,11 +53,21 @@ while True:
 
     filepath = CUR_DIR / route
     if filepath.is_file():
-        response = build_response() + read_file(filepath)
+        if filepath.suffix == '.css':
+            response = build_response(headers='Content-type: text/css; chrset=utf-8')+read_file(filepath)
+        else:
+            response = build_response() + read_file(filepath)
     elif route == '':
         response = index(request)
+    elif route.startswith('delete'):
+        id=int(route.split('/')[-1])
+        response=delete(id)
+    elif route.startswith('edit'):
+        id=int(route.split('/')[-1])
+        response=edit(request,id)
+
     else:
-        response = build_response()
+        response= error()
 
     client_connection.sendall(response)
 

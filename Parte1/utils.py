@@ -39,9 +39,12 @@ def anota_json(params):
         file.seek(0)
         json.dump(file_data,file,indent=4)
 
-def build_response(body='', code=200, reason='OK', headers=''):
-    status_line = f'HTTP/1.1{code}{reason}\n'
-    response = f'{status_line}{headers}\n{body}'
-    return response.encode()
+def build_response(body='', code = 200, reason = 'OK', headers = ''):
+    final = f'HTTP/1.1 {code} {reason}'
+    if headers:
+        final += "\n" + headers
+    
+    final += "\n\n" + body
+    return final.encode()
 
             

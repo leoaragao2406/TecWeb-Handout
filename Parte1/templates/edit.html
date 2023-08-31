@@ -30,20 +30,18 @@
           class="form-card-title"
           type="text"
           name="titulo"
-          placeholder="T&iacute;tulo"
+          placeholder={titulo}
+          value="{titulo}"
         />
         <textarea
           class="autoresize"
           name="detalhes"
-          placeholder="Digite o conte&uacute;do..."
+          placeholder={conteudo}
+          value="{conteudo}"
         ></textarea>
-        <button class="btn" type="submit">Criar</button>
+        <a href="../" class="btn1" >cancelar</a>
+        <button class="btn" type="submit">Atualizar</button>
       </form>
-
-      <div class="card-container">
-        {notes}
-      </div>
-    </main>
 
     <script type="text/javascript" src="../templates/getit.js"></script>
   </body>
